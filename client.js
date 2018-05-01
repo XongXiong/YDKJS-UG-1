@@ -15,3 +15,11 @@ const ACCESSORY_PRICE = 9.99;
 var bankBalance = 1234.56;
 var amount = 0;
 
+function calculateTax(amount) {
+    return amount * TAX_RATE;
+}
+
+function formatPrice(amount) {
+    return '$' + amount.toFixed(2);
+}
+
