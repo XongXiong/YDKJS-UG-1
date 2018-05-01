@@ -12,7 +12,7 @@ const TAX_RATE = 0.05;
 const PHONE_PRICE = 49.99;
 const ACCESSORY_PRICE = 4.99;
 
-var bankBalance = 1000;
+var bankBalance = prompt('What is your current bank balance?');
 var amount = 0;
 var amountBought = 0;
 
@@ -39,8 +39,10 @@ amount += calculateTax(amount);
 // If price of phones with tax is too much, subtract phones 
 // We prefer to keep the accessories over the other phones
 while (amount > bankBalance) {
-amount -= (PHONE_PRICE + calculateTax(PHONE_PRICE));
+    console.log('We cannot afford this because the amount is ' + formatPrice(amount) + ' and our bank balance is ' + bankBalance + '. :( Let\'s get rid of some phones.');
+    amount -= (PHONE_PRICE + calculateTax(PHONE_PRICE));
 };
+console.log('We bought a total of ' + amountBought + ' phones for ' + formatPrice(amount) + '1');
 
 // Can you still afford this? 
 if (amount > bankBalance) {
