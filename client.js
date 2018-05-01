@@ -14,7 +14,8 @@ const ACCESSORY_PRICE = 4.99;
 
 var bankBalance = prompt('What is your current bank balance?');
 var amount = 0;
-var amountBought = 0;
+var phonesBought = 0;
+var accessoriesBought = 0;
 
 function calculateTax(amount) {
     return amount * TAX_RATE;
@@ -25,28 +26,29 @@ function formatPrice(amount) {
 }
 
 while (amount < bankBalance) {
-    // We can afford a new phone!
+    // We might be able to afford a new phone!
     amount += PHONE_PRICE;
-    amountBought++
+    phonesBought++
     if (amount < SPENDING_THRESHOLD) {
         // We can buy a cool accessory!
         amount += ACCESSORY_PRICE;
+        accessoriesBought++
     }
 };
 // Add in taxes 
 amount += calculateTax(amount);
 
-// If price of phones with tax is too much, subtract phones 
-// We prefer to keep the accessories over the other phones
+// If price of phones and accessories with tax is too much, get rid of stuff 
 while (amount > bankBalance) {
-    console.log('We cannot afford this because the amount is ' + formatPrice(amount) + ' and our bank balance is ' + bankBalance + '. :( Let\'s get rid of some phones.');
-    amount -= (PHONE_PRICE + calculateTax(PHONE_PRICE));
+    console.log('We cannot afford this because the amount is ' + formatPrice(amount) + ' for ' + phonesBought + ' phone(s) and ' + accessoriesBought + ' accessory(ies) while our bank balance is ' + bankBalance + '. :( Let\'s get rid of some stuff.');
+    if (accessoriesBought > 0) {
+        amount -= (ACCESSORY_PRICE + calculateTax(ACCESSORY_PRICE));
+        accessoriesBought--
+        console.log('We got rid of 1 accessory.');
+    } else if (amount > bankBalance){
+        amount -= (PHONE_PRICE + calculateTax(PHONE_PRICE));
+        phonesBought--
+        console.log('We got rid of 1 phone.');
+    }
 };
-console.log('We bought a total of ' + amountBought + ' phones for ' + formatPrice(amount) + '1');
-
-// Can you still afford this? 
-if (amount > bankBalance) {
-    console.log('We cannot buy this. *sadface*');
-} else {
-    console.log('We bought a total of ' + amountBought + ' phones for ' + formatPrice(amount) + '1');
-};
+console.log('We bought a total of ' + phonesBought + ' phone(s) and ' + accessoriesBought + ' accessory(ies) for ' + formatPrice(amount) + '!');
