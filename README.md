@@ -1,0 +1,1 @@
+Following **_You Don't Know JavaScript_** _Up and Going_ Chapter 1 by Kyle Simpson
